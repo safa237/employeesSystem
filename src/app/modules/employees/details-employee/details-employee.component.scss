@@ -1,0 +1,38 @@
+.form-group{
+    width: 45%;
+}
+h2{
+    margin: auto;
+}
+.d-flex{
+    margin: 1em 0px 1em 0px;
+}
+.editBtn{
+    background-color: #f28c38;
+    border: none;
+    outline: none;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 80px;
+}
+.saveBtn{
+    padding: 10px;
+    width: 80px;
+    border-radius: 10px;
+}
+@media (max-width: 768px) {
+    .d-flex{
+        display: flex;
+        flex-direction: column;
+    }
+    .form-group{
+        width: 100%;
+    }
+    .img-fluid {
+        max-width: 80%;
+        height: auto;
+        margin: auto;
+        margin-bottom: 5px;
+    }
+  }

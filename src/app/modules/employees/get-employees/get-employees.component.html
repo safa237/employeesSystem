@@ -1,0 +1,75 @@
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-5 mt-3">
+      <h3><span class="text-orange">{{ totalEmployees }}</span> Employees</h3>
+      <div>
+        <div class="search-box">
+            <input
+            class="searchInput"
+            type="text"
+            placeholder="Search by name"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput(searchQuery)"
+          />
+          <button class="search-btn" (click)="onSearchInput(searchQuery)">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+          <button *ngIf="isSearching" class="btn btn-sm btn-outline-danger ms-2" (click)="resetSearch()">Clear</button>
+
+          </div>
+      </div>
+      <div>
+      
+        <button (click)="navigateToAddEmployee()" class="btn btn-orange">+Add Employee</button>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let employee of employees; let i = index">
+        <div class="card shadow-sm rounded-4 border-0 p-3 position-relative h-100">
+          <div class="d-flex align-items-center mb-3">
+            <img [src]="employee.image" class="rounded-circle me-3" width="60" height="60" alt="Employee photo" />
+            <div>
+              <h6 class="mb-0 fw-bold text-uppercase">{{ employee.firstName }} {{ employee.lastName }}</h6>
+              <small class="text-muted">{{ employee.company?.title }}</small>
+            </div>
+            <span class="status-dot position-absolute" [ngClass]="{'online': employee.status === 'online'}"></span>
+          </div>
+          <div class="border-top pt-2">
+            <div class="d-flex justify-content-between mb-2">
+              <div>
+                <div class="label">Department</div>
+                <div>{{ employee.company?.department }}</div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center mb-1">
+              <span class="icon me-2">
+                <i class="fa-solid fa-envelope"></i>
+              </span>
+              <div>{{ employee.email }}</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <span class="icon me-2">
+                <i class="fa-solid fa-phone"></i>
+              </span>
+              <div>{{ employee.phone }}</div>
+            </div>
+          </div>
+          <div class="dots position-absolute top-0 end-0 p-2" (click)="toggleDiv(i)">
+            <span>⋯</span>
+          </div>
+          <div *ngIf="visibleCardIndex === i" class="custom-dropdown position-absolute">
+            <p class="dropdown-item" (click)="viewEmployeeDetails(employee.id)">View Employee</p>
+            <p class="dropdown-item " (click)="openDeleteModal(employee)">Delete Employee</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="pagination d-flex justify-content-center align-items-center mt-4">
+      <button class="btn btn-outline-secondary me-2" [disabled]="currentPage === 1" (click)="previousPage()">Previous</button>
+      <button class="btn mx-1" [ngClass]="{'btn-orange': currentPage === page, 'btn-outline-secondary': currentPage !== page}" *ngFor="let page of pageNumbers" (click)="goToPage(page)">{{ page }}</button>
+      <button class="btn btn-outline-secondary ms-2" [disabled]="currentPage === totalPages" (click)="nextPage()">Next</button>
+    </div>
+  
+    <app-modal *ngIf="showModal" (confirm)="confirmDelete()" (cancel)="closeModal()"></app-modal>
+  </div>

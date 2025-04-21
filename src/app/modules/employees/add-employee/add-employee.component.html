@@ -1,0 +1,110 @@
+<div class="container mt-5">
+    <div class="card shadow-lg">
+      <div class="card-header  text-white text-center">
+        <h3>Add New Employee</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>First Name</label>
+              <input class="form-control"  formControlName="firstName" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('firstName')?.errors?.['required'] ">
+                First name is required.
+              </small>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Last Name</label>
+              <input class="form-control" formControlName="lastName" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('lastName')?.errors?.['required'] ">
+                Last name is required.
+              </small>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>Email</label>
+              <input type="email" class="form-control" formControlName="email" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('email')?.errors">
+                {{ employeeForm.get('email')?.errors?.['required']  ? 'Email is required.' : 'Enter a valid email.' }}
+              </small>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Password</label>
+              <input type="password" class="form-control" formControlName="password" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('password')?.errors?.['required'] ">
+                Password is required.
+              </small>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>Address</label>
+              <input class="form-control" formControlName="address" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('address')?.errors?.['required'] ">
+                Address is required.
+              </small>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>City</label>
+              <input class="form-control" formControlName="city" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('city')?.errors?.['required'] ">
+                City is required.
+              </small>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>Phone Number</label>
+              <input class="form-control" formControlName="phone" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('phone')?.errors">
+                {{ employeeForm.get('phone')?.errors?.['required']  ? 'Phone is required.' : 'Enter a valid phone number.' }}
+              </small>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Age</label>
+              <input type="number" class="form-control" formControlName="age" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('age')?.errors">
+                {{ employeeForm.get('age')?.errors?.['required']  ? 'Age is required.' : 'Must be at least 18.' }}
+              </small>
+            </div>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>Department</label>
+              <input class="form-control" formControlName="department" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('department')?.errors?.['required'] ">
+                Department is required.
+              </small>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Title</label>
+              <input class="form-control" formControlName="title" />
+              <small class="text-danger" *ngIf="submitted && employeeForm.get('title')?.errors?.['required'] ">
+                Title is required.
+              </small>
+            </div>
+          </div>
+  
+          <div class="mb-3">
+            <label>Upload Profile Image</label>
+            <input type="file" class="form-control" (change)="onImageSelected($event)" />
+            <small class="text-danger" *ngIf="submitted && employeeForm.get('image')?.errors?.['required']  ">
+              Profile image is required.
+            </small>
+          </div>
+          
+          <div class="mb-3 text-center" *ngIf="imagePreview">
+            <img [src]="imagePreview" class="img-thumbnail" width="150" alt="Preview" />
+          </div>
+          
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-success px-5 py-2">
+              Add Employee
+            </button>
+          </div>
+          </form>
